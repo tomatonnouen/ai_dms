@@ -23,9 +23,12 @@ define('GEMINI_API_KEY', 'your-gemini-api-key');  // ← Gemini APIキーを入�
 define('GEMINI_API_URL', 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent');
 define('PDF_PAGE_LIMIT', 10);
 
-// Ntfy設定（オプション）
-define('NTFY_TOPIC', 'your-ntfy-topic');  // ← Ntfyトピック名を入力
-define('NTFY_SERVER', 'https://ntfy.sh');
+// Ntfy設定（自サーバー・Basic認証付き）
+define('NTFY_BASE_URL', 'https://tomaton-nouen.duckdns.org');  // NtfyサーバーのベースURL
+define('NTFY_TOPIC', 'tasklist');                              // トピック名
+define('NTFY_USER', 'tomaton');                                // Basic認証のユーザー名
+define('NTFY_PASS', 'tomaton45381');                           // Basic認証のパスワード
+define('NTFY_CLICK_URL', 'https://tomaton-nouen.com/task/tasklist.php'); // クリック時の遷移先URL
 
 // セッション設定
 define('SESSION_LIFETIME', 3600 * 24); // 24時間

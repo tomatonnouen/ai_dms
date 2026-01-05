@@ -164,37 +164,50 @@ function getPdfPageCount($filepath) {
 }
 
 /**
- * Ntfy通知を送信
- * @param string $title
- * @param string $message
- * @param string $priority
- * @param array $tags
+ * Ntfy通知を送信（自サーバー・Basic認証付き）
+ * @param string $title タイトル
+ * @param string $message メッセージ本文
  */
-function sendNtfyNotification($title, $message, $priority = 'default', $tags = []) {
-    try {
-        $url = NTFY_SERVER . '/' . NTFY_TOPIC;
+function notify($title, $message) {
+    // POST先のURL (例: https://example.com/mytopic)
+    $url = NTFY_BASE_URL . '/' . NTFY_TOPIC;
 
-        $data = [
-            'topic' => NTFY_TOPIC,
-            'title' => $title,
-            'message' => $message,
-            'priority' => $priority,
-            'tags' => $tags
-        ];
+    // cURLの初期化
+    $ch = curl_init($url);
 
-        $options = [
-            'http' => [
-                'method' => 'POST',
-                'header' => 'Content-Type: application/json',
-                'content' => json_encode($data)
-            ]
-        ];
+    // Basic認証の設定
+    curl_setopt($ch, CURLOPT_USERPWD, NTFY_USER . ':' . NTFY_PASS);
 
-        $context = stream_context_create($options);
-        file_get_contents($url, false, $context);
-    } catch (Exception $e) {
-        error_log('Ntfy notification failed: ' . $e->getMessage());
+    // POSTリクエストにする
+    curl_setopt($ch, CURLOPT_POST, true);
+
+    // HTTPヘッダ設定: タイトルとクリックアクションを付加
+    $headers = [
+        'Title: ' . $title,
+        'Click: ' . NTFY_CLICK_URL
+    ];
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    // POSTデータ (メッセージ本文)
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $message);
+
+    // SSL証明書の検証 (Let's Encrypt等の正規証明書ならtrue推奨)
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+
+    // レスポンスを返り値として取得
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // 実行
+    $response = curl_exec($ch);
+
+    // エラーチェック (ログに記録)
+    if (curl_errno($ch)) {
+        $error_msg = curl_error($ch);
+        error_log('Ntfy notification failed: ' . $error_msg);
     }
+
+    // cURLセッション終了
+    curl_close($ch);
 }
 
 /**

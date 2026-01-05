@@ -96,16 +96,14 @@ try {
         }
     }
 
-    sendNtfyNotification(
+    notify(
         '新規ドキュメント登録（Web）',
         sprintf(
             "カテゴリ: %s\nタイトル: %s\nページ数: %d",
             $categoryName,
             $title ?: '(タイトルなし)',
             $pageCount ?: 0
-        ),
-        'default',
-        ['document', 'web']
+        )
     );
 
     jsonSuccess([
