@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <!-- PDFプレビュー -->
             <div class="pdf-preview">
-                <iframe src="/web/uploads/<?= h($document['file_path']) ?>"></iframe>
+                <iframe src="<?= BASE_PATH ?>/uploads/<?= h($document['file_path']) ?>"></iframe>
             </div>
 
             <!-- 編集フォーム -->
