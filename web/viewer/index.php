@@ -28,9 +28,9 @@ $categories = $stmt->fetchAll();
         <header class="header">
             <h1>📚 資料閲覧</h1>
             <div class="header-actions">
-                <a href="/web/register/" class="btn btn-primary">資料登録</a>
-                <a href="/web/viewer/categories.php" class="btn btn-secondary">カテゴリ管理</a>
-                <a href="/web/auth/logout.php" class="btn btn-secondary">ログアウト</a>
+                <a href="<?= BASE_PATH ?>/register/" class="btn btn-primary">資料登録</a>
+                <a href="<?= BASE_PATH ?>/viewer/categories.php" class="btn btn-secondary">カテゴリ管理</a>
+                <a href="<?= BASE_PATH ?>/auth/logout.php" class="btn btn-secondary">ログアウト</a>
             </div>
         </header>
 
@@ -118,6 +118,9 @@ $categories = $stmt->fetchAll();
         </div>
     </div>
 
+    <script>
+        const BASE_PATH = '<?= BASE_PATH ?>';
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

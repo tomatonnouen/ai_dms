@@ -101,7 +101,7 @@ function handleFile(file) {
  */
 async function analyzePdf(base64, filename) {
     try {
-        const response = await fetch('/web/api/analyze_pdf.php', {
+        const response = await fetch(BASE_PATH + '/api/analyze_pdf.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -196,7 +196,7 @@ async function handleSubmit(e) {
         formData.append('document_date', document.getElementById('document_date').value);
         formData.append('suggested_filename', document.getElementById('suggested_filename').value);
 
-        const response = await fetch('/web/api/save_document.php', {
+        const response = await fetch(BASE_PATH + '/api/save_document.php', {
             method: 'POST',
             body: formData
         });

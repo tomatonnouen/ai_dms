@@ -254,7 +254,7 @@ $categoryStats = $stmt->fetchAll();
             <p>PDFファイルを自動で分類・管理するシステム</p>
             <div class="user-info">
                 <div class="username">👤 <?= h($_SESSION['username']) ?></div>
-                <a href="/web/auth/logout.php" class="logout-link">ログアウト</a>
+                <a href="<?= BASE_PATH ?>/auth/logout.php" class="logout-link">ログアウト</a>
             </div>
         </div>
 
@@ -281,19 +281,19 @@ $categoryStats = $stmt->fetchAll();
 
         <!-- アクション -->
         <div class="actions-grid">
-            <a href="/web/register/" class="action-card">
+            <a href="<?= BASE_PATH ?>/register/" class="action-card">
                 <div class="action-icon">📤</div>
                 <div class="action-title">資料登録</div>
                 <div class="action-description">PDFファイルをアップロードして自動分類</div>
             </a>
 
-            <a href="/web/viewer/" class="action-card">
+            <a href="<?= BASE_PATH ?>/viewer/" class="action-card">
                 <div class="action-icon">🔍</div>
                 <div class="action-title">資料閲覧</div>
                 <div class="action-description">登録された資料を検索・閲覧</div>
             </a>
 
-            <a href="/web/viewer/categories.php" class="action-card">
+            <a href="<?= BASE_PATH ?>/viewer/categories.php" class="action-card">
                 <div class="action-icon">⚙️</div>
                 <div class="action-title">カテゴリ管理</div>
                 <div class="action-description">カテゴリの追加・編集・削除</div>

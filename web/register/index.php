@@ -28,8 +28,8 @@ $categories = $stmt->fetchAll();
         <header class="header">
             <h1>📄 資料登録</h1>
             <div class="header-actions">
-                <a href="/web/viewer/" class="btn btn-secondary">閲覧画面へ</a>
-                <a href="/web/auth/logout.php" class="btn btn-secondary">ログアウト</a>
+                <a href="<?= BASE_PATH ?>/viewer/" class="btn btn-secondary">閲覧画面へ</a>
+                <a href="<?= BASE_PATH ?>/auth/logout.php" class="btn btn-secondary">ログアウト</a>
             </div>
         </header>
 
@@ -103,12 +103,15 @@ $categories = $stmt->fetchAll();
                 <p>資料が正常に登録されました</p>
                 <div class="form-actions">
                     <button id="another-btn" class="btn btn-primary">続けて登録</button>
-                    <a href="/web/viewer/" class="btn btn-secondary">閲覧画面へ</a>
+                    <a href="<?= BASE_PATH ?>/viewer/" class="btn btn-secondary">閲覧画面へ</a>
                 </div>
             </div>
         </main>
     </div>
 
+    <script>
+        const BASE_PATH = '<?= BASE_PATH ?>';
+    </script>
     <script src="script.js"></script>
 </body>
 </html>

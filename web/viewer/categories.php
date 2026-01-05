@@ -184,7 +184,7 @@ $categories = $stmt->fetchAll();
         <header class="header">
             <h1>🏷️ カテゴリ管理</h1>
             <div class="header-actions">
-                <a href="/web/viewer/" class="btn btn-secondary">閲覧画面へ</a>
+                <a href="<?= BASE_PATH ?>/viewer/" class="btn btn-secondary">閲覧画面へ</a>
             </div>
         </header>
 

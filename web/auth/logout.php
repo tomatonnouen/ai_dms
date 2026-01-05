@@ -9,5 +9,5 @@ require_once __DIR__ . '/../includes/config.php';
 session_destroy();
 
 // ログインページにリダイレクト
-header('Location: /web/auth/login.php');
+header('Location: ' . BASE_PATH . '/auth/login.php');
 exit;

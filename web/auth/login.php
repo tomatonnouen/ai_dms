@@ -11,7 +11,7 @@ $error = '';
 
 // すでにログインしている場合はリダイレクト
 if (isLoggedIn()) {
-    header('Location: /web/index.php');
+    header('Location: ' . BASE_PATH . '/index.php');
     exit;
 }
 
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->execute([$user['id']]);
 
                 // リダイレクト
-                $redirect = $_GET['redirect'] ?? '/web/index.php';
+                $redirect = $_GET['redirect'] ?? BASE_PATH . '/index.php';
                 header('Location: ' . $redirect);
                 exit;
             } else {

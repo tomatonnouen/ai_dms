@@ -14,7 +14,7 @@ requireLogin();
 $id = !empty($_GET['id']) ? (int)$_GET['id'] : 0;
 
 if ($id === 0) {
-    header('Location: /web/viewer/');
+    header('Location: ' . BASE_PATH . '/viewer/');
     exit;
 }
 
@@ -30,7 +30,7 @@ $stmt->execute([$id]);
 $document = $stmt->fetch();
 
 if (!$document) {
-    header('Location: /web/viewer/');
+    header('Location: ' . BASE_PATH . '/viewer/');
     exit;
 }
 
@@ -123,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <header class="header">
             <h1>📝 資料編集</h1>
             <div class="header-actions">
-                <a href="/web/viewer/" class="btn btn-secondary">閲覧画面へ</a>
+                <a href="<?= BASE_PATH ?>/viewer/" class="btn btn-secondary">閲覧画面へ</a>
             </div>
         </header>
 
@@ -185,7 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="form-actions">
-                    <a href="/web/viewer/" class="btn btn-secondary">キャンセル</a>
+                    <a href="<?= BASE_PATH ?>/viewer/" class="btn btn-secondary">キャンセル</a>
                     <button type="submit" class="btn btn-primary">更新</button>
                 </div>
             </form>

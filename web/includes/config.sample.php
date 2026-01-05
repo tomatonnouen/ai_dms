@@ -13,6 +13,9 @@ define('DB_USER', 'your_user');           // ← データベースユーザー�
 define('DB_PASS', 'your_password');       // ← データベースパスワードを入力
 define('DB_CHARSET', 'utf8mb4');
 
+// アプリケーション設定
+define('BASE_PATH', '/ai_dms/web');  // アプリケーションのベースパス（環境に応じて変更）
+
 // ファイル保存設定
 define('UPLOAD_DIR', dirname(__DIR__) . '/uploads/');
 define('MAX_FILE_SIZE', 50 * 1024 * 1024); // 50MB

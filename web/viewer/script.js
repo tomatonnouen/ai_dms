@@ -109,7 +109,7 @@ async function loadDocuments() {
         }
 
         // API呼び出し
-        const response = await fetch('/web/api/search_documents.php?' + params);
+        const response = await fetch(BASE_PATH + '/api/search_documents.php?' + params);
         const result = await response.json();
 
         if (result.success) {
@@ -213,7 +213,7 @@ function openDocument(doc) {
     currentDocument = doc;
 
     modalTitle.textContent = doc.title || '(タイトルなし)';
-    pdfViewer.src = '/web/uploads/' + doc.file_path;
+    pdfViewer.src = BASE_PATH + '/uploads/' + doc.file_path;
     pdfModal.style.display = 'flex';
 }
 
@@ -231,7 +231,7 @@ function closeModal() {
  */
 function handleEdit() {
     if (currentDocument) {
-        window.location.href = '/web/viewer/edit.php?id=' + currentDocument.id;
+        window.location.href = BASE_PATH + '/viewer/edit.php?id=' + currentDocument.id;
     }
 }
 
@@ -248,7 +248,7 @@ async function handleDelete() {
     }
 
     try {
-        const response = await fetch('/web/api/delete_document.php', {
+        const response = await fetch(BASE_PATH + '/api/delete_document.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
