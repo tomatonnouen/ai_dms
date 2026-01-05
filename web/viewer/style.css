@@ -170,7 +170,6 @@ body {
     border-radius: 8px;
     padding: 20px;
     transition: all 0.3s;
-    cursor: pointer;
 }
 
 .document-card:hover {
@@ -224,6 +223,53 @@ body {
     display: flex;
     align-items: center;
     gap: 4px;
+}
+
+.document-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.btn-card {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-card-view {
+    background: #667eea;
+    color: white;
+}
+
+.btn-card-view:hover {
+    background: #5568d3;
+}
+
+.btn-card-edit {
+    background: #48bb78;
+    color: white;
+}
+
+.btn-card-edit:hover {
+    background: #38a169;
+}
+
+.btn-card-delete {
+    background: #e53e3e;
+    color: white;
+}
+
+.btn-card-delete:hover {
+    background: #c53030;
 }
 
 /* ページネーション */
@@ -287,74 +333,6 @@ body {
 .btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-}
-
-/* モーダル */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    padding: 20px;
-}
-
-.modal-content {
-    background: white;
-    border-radius: 12px;
-    width: 100%;
-    max-width: 900px;
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.modal-header {
-    padding: 20px 30px;
-    border-bottom: 1px solid #e2e8f0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-header h2 {
-    font-size: 20px;
-    color: #333;
-}
-
-.btn-close {
-    background: none;
-    border: none;
-    font-size: 32px;
-    color: #999;
-    cursor: pointer;
-    line-height: 1;
-    padding: 0;
-    width: 40px;
-    height: 40px;
-}
-
-.btn-close:hover {
-    color: #333;
-}
-
-.modal-body {
-    padding: 20px 30px;
-    overflow-y: auto;
-    flex: 1;
-}
-
-.modal-footer {
-    padding: 20px 30px;
-    border-top: 1px solid #e2e8f0;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
 }
 
 /* フォーム */
@@ -436,20 +414,6 @@ body {
     .document-grid {
         grid-template-columns: 1fr;
     }
-
-    .modal-content {
-        max-height: 95vh;
-    }
-
-    .modal-header,
-    .modal-body,
-    .modal-footer {
-        padding: 15px 20px;
-    }
-
-    .modal-body iframe {
-        height: 400px !important;
-    }
 }
 
 @media (max-width: 480px) {
@@ -468,9 +432,5 @@ body {
 
     .document-card {
         padding: 15px;
-    }
-
-    .modal-body iframe {
-        height: 300px !important;
     }
 }

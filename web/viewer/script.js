@@ -5,7 +5,6 @@
 let currentPage = 0;
 let currentLimit = 20;
 let currentFilters = {};
-let currentDocument = null;
 
 // DOM要素
 const categoryFilter = document.getElementById('category-filter');
@@ -21,12 +20,6 @@ const pagination = document.getElementById('pagination');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 const pageInfo = document.getElementById('page-info');
-const pdfModal = document.getElementById('pdf-modal');
-const modalTitle = document.getElementById('modal-title');
-const pdfViewer = document.getElementById('pdf-viewer');
-const modalClose = document.getElementById('modal-close');
-const modalEdit = document.getElementById('modal-edit');
-const modalDelete = document.getElementById('modal-delete');
 
 // イベントリスナー
 searchBtn.addEventListener('click', handleSearch);
@@ -39,9 +32,6 @@ keywordSearch.addEventListener('keypress', (e) => {
 categoryFilter.addEventListener('change', handleSearch);
 prevBtn.addEventListener('click', () => handlePageChange(currentPage - 1));
 nextBtn.addEventListener('click', () => handlePageChange(currentPage + 1));
-modalClose.addEventListener('click', closeModal);
-modalEdit.addEventListener('click', handleEdit);
-modalDelete.addEventListener('click', handleDelete);
 
 // 初期読み込み
 loadDocuments();
@@ -162,7 +152,6 @@ function displayDocuments(data) {
 function createDocumentCard(doc) {
     const card = document.createElement('div');
     card.className = 'document-card';
-    card.onclick = () => openDocument(doc);
 
     const category = doc.category_name || '未分類';
     const categoryClass = doc.category_name ? '' : ' uncategorized';
@@ -183,7 +172,32 @@ function createDocumentCard(doc) {
             <div class="document-meta-item">📄 ${pages}ページ</div>
             <div class="document-meta-item">💾 ${size}</div>
         </div>
+        <div class="document-actions">
+            <button class="btn-card btn-card-view" data-id="${doc.id}">📄 表示</button>
+            <button class="btn-card btn-card-edit" data-id="${doc.id}">✏️ 編集</button>
+            <button class="btn-card btn-card-delete" data-id="${doc.id}">🗑️ 削除</button>
+        </div>
     `;
+
+    // イベントリスナーを追加
+    const viewBtn = card.querySelector('.btn-card-view');
+    const editBtn = card.querySelector('.btn-card-edit');
+    const deleteBtn = card.querySelector('.btn-card-delete');
+
+    viewBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openDocument(doc);
+    });
+
+    editBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        handleEdit(doc.id);
+    });
+
+    deleteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        handleDelete(doc.id);
+    });
 
     return card;
 }
@@ -207,42 +221,24 @@ function updatePagination(total) {
 }
 
 /**
- * ドキュメントを開く
+ * ドキュメントを開く（新しいタブで表示）
  */
 function openDocument(doc) {
-    currentDocument = doc;
-
-    modalTitle.textContent = doc.title || '(タイトルなし)';
-    pdfViewer.src = BASE_PATH + '/uploads/' + doc.file_path;
-    pdfModal.style.display = 'flex';
-}
-
-/**
- * モーダルを閉じる
- */
-function closeModal() {
-    pdfModal.style.display = 'none';
-    pdfViewer.src = '';
-    currentDocument = null;
+    const pdfUrl = BASE_PATH + '/uploads/' + doc.file_path;
+    window.open(pdfUrl, '_blank');
 }
 
 /**
  * 編集処理
  */
-function handleEdit() {
-    if (currentDocument) {
-        window.location.href = BASE_PATH + '/viewer/edit.php?id=' + currentDocument.id;
-    }
+function handleEdit(documentId) {
+    window.location.href = BASE_PATH + '/viewer/edit.php?id=' + documentId;
 }
 
 /**
  * 削除処理
  */
-async function handleDelete() {
-    if (!currentDocument) {
-        return;
-    }
-
+async function handleDelete(documentId) {
     if (!confirm('本当に削除しますか？')) {
         return;
     }
@@ -254,7 +250,7 @@ async function handleDelete() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                id: currentDocument.id
+                id: documentId
             })
         });
 
@@ -262,7 +258,6 @@ async function handleDelete() {
 
         if (result.success) {
             alert('削除しました');
-            closeModal();
             loadDocuments();
         } else {
             throw new Error(result.message || '削除に失敗しました');

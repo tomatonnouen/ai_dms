@@ -101,23 +101,6 @@ $categories = $stmt->fetchAll();
         </main>
     </div>
 
-    <!-- PDFビューアモーダル -->
-    <div id="pdf-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modal-title"></h2>
-                <button id="modal-close" class="btn-close">×</button>
-            </div>
-            <div class="modal-body">
-                <iframe id="pdf-viewer" style="width: 100%; height: 600px; border: none;"></iframe>
-            </div>
-            <div class="modal-footer">
-                <button id="modal-edit" class="btn btn-primary">編集</button>
-                <button id="modal-delete" class="btn btn-danger">削除</button>
-            </div>
-        </div>
-    </div>
-
     <script>
         const BASE_PATH = '<?= BASE_PATH ?>';
     </script>
