@@ -224,7 +224,7 @@ function updatePagination(total) {
  * ドキュメントを開く（新しいタブで表示）
  */
 function openDocument(doc) {
-    const pdfUrl = BASE_PATH + '/uploads/' + doc.file_path;
+    const pdfUrl = BASE_PATH + '/viewer/view_pdf.php?id=' + doc.id;
     window.open(pdfUrl, '_blank');
 }
 
