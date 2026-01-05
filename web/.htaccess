@@ -1,0 +1,41 @@
+# 資料自動仕分けシステム - Apache設定
+
+# PHPエラー表示（本番環境では無効化推奨）
+php_flag display_errors On
+php_flag display_startup_errors On
+
+# PHPメモリ制限
+php_value memory_limit 256M
+php_value upload_max_filesize 50M
+php_value post_max_size 50M
+
+# タイムゾーン
+php_value date.timezone "Asia/Tokyo"
+
+# デフォルトインデックスファイル
+DirectoryIndex index.php index.html
+
+# セキュリティ: ディレクトリリスティング無効化
+Options -Indexes
+
+# セキュリティ: .htaccessと.gitの保護
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# セキュリティ: config.phpの直接アクセス禁止
+<Files "config.php">
+    Require all denied
+</Files>
+
+# セキュリティ: SQLファイルの直接アクセス禁止
+<FilesMatch "\.sql$">
+    Require all denied
+</FilesMatch>
+
+# UTF-8エンコーディング
+AddDefaultCharset UTF-8
+
+# MIMEタイプ設定
+AddType application/pdf .pdf
+AddType application/json .json

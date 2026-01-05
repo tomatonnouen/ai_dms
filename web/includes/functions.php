@@ -6,6 +6,11 @@
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/db.php';
 
+// BASE_PATHが未定義の場合はデフォルト値を設定
+if (!defined('BASE_PATH')) {
+    define('BASE_PATH', '/ai_dms/web');
+}
+
 /**
  * ログイン確認
  * @return bool
