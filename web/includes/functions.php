@@ -3,8 +3,12 @@
  * 資料自動仕分けシステム - 共通関数
  */
 
-require_once __DIR__ . '/config.php';
-require_once __DIR__ . '/db.php';
+// このファイルのディレクトリを取得
+$includesDir = dirname(__FILE__);
+
+// config.phpとdb.phpを読み込み
+require_once $includesDir . '/config.php';
+require_once $includesDir . '/db.php';
 
 // BASE_PATHが未定義の場合はデフォルト値を設定
 if (!defined('BASE_PATH')) {

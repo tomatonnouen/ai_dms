@@ -3,7 +3,10 @@
  * 資料自動仕分けシステム - データベース接続
  */
 
-require_once __DIR__ . '/config.php';
+// このファイルのディレクトリを取得
+$includesDir = dirname(__FILE__);
+
+require_once $includesDir . '/config.php';
 
 /**
  * データベース接続を取得
