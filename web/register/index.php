@@ -84,9 +84,9 @@ $categories = $stmt->fetchAll();
                     </div>
 
                     <div class="form-group">
-                        <label for="suggested_filename">ファイル名（英数字）</label>
+                        <label for="suggested_filename">ファイル名</label>
                         <input type="text" id="suggested_filename" name="suggested_filename" placeholder="例: annual_meeting_2025">
-                        <small>自動生成されます。変更も可能です。</small>
+                        <small>タイトルから自動生成されます。日本語も使用可能です。</small>
                     </div>
 
                     <div class="form-actions">

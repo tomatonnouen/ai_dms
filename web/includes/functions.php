@@ -115,30 +115,44 @@ function sanitizeFilename($filename) {
 
 /**
  * ユニークなファイル名を生成
- * @param string $suggestedName 提案されたファイル名（拡張子なし）
+ * @param string $suggestedName 提案されたファイル名（拡張子なし、日本語対応）
  * @param string $ext 拡張子
  * @return string
  */
 function generateUniqueFilename($suggestedName, $ext = 'pdf') {
-    // 安全な文字のみ残す
-    $safeName = preg_replace('/[^a-zA-Z0-9_-]/', '_', $suggestedName);
+    // ファイル名に使えない文字を除去
+    $invalidChars = ['/', '\\', ':', '*', '?', '"', '<', '>', '|'];
+    $safeName = str_replace($invalidChars, '', $suggestedName);
 
-    // 年ディレクトリ
+    // 連続する空白をアンダースコアに変換
+    $safeName = preg_replace('/\s+/', '_', trim($safeName));
+
+    // NFC正規化（macOS濁点問題対策）
+    if (class_exists('Normalizer')) {
+        $safeName = Normalizer::normalize($safeName, Normalizer::FORM_C);
+    }
+
+    // 文字数制限（30文字）
+    if (mb_strlen($safeName) > 30) {
+        $safeName = mb_substr($safeName, 0, 30);
+    }
+
+    // 年ディレクトリ作成
     $year = date('Y');
     $yearDir = UPLOAD_DIR . $year . '/';
-
-    // ディレクトリが存在しない場合は作成
     if (!is_dir($yearDir)) {
         mkdir($yearDir, 0755, true);
     }
 
-    // ファイル名の重複チェック
-    $filename = $safeName . '.' . $ext;
+    // 日付を付加
+    $date = date('Y-m-d');
+    $filename = $safeName . '_' . $date . '.' . $ext;
     $filePath = $yearDir . $filename;
-    $counter = 1;
 
+    // 重複チェック
+    $counter = 1;
     while (file_exists($filePath)) {
-        $filename = $safeName . '_' . $counter . '.' . $ext;
+        $filename = $safeName . '_' . $date . '_' . $counter . '.' . $ext;
         $filePath = $yearDir . $filename;
         $counter++;
     }

@@ -48,7 +48,6 @@ try {
 - title: 文書のタイトル（年号を含める）
 - summary: 200文字以内の概要
 - document_date: 文書内の日付（YYYY-MM-DD形式、不明な場合はnull）
-- suggested_filename: 英語のファイル名（スネークケース、20文字以内、拡張子なし）
 - confidence: 判定の信頼度（0.0-1.0）
 
 【注意事項】

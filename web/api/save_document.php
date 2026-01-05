@@ -25,7 +25,8 @@ try {
     $title = $_POST['title'] ?? '';
     $summary = $_POST['summary'] ?? '';
     $documentDate = !empty($_POST['document_date']) ? $_POST['document_date'] : null;
-    $suggestedFilename = $_POST['suggested_filename'] ?? '';
+    // タイトルをそのままファイル名として使用
+    $suggestedFilename = !empty($_POST['suggested_filename']) ? $_POST['suggested_filename'] : $title;
 
     // 拡張子チェック
     if (!isAllowedExtension($file['name'])) {
