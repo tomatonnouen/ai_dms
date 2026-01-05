@@ -164,8 +164,9 @@ function displayAnalysisResult(analysis) {
     // 文書日付
     document.getElementById('document_date').value = analysis.document_date || '';
 
-    // ファイル名
-    document.getElementById('suggested_filename').value = analysis.suggested_filename || '';
+    // ファイル名（suggested_filenameがなければtitleを使用）
+    document.getElementById('suggested_filename').value =
+        analysis.suggested_filename || analysis.title || '';
 
     // UI更新
     analyzingArea.style.display = 'none';

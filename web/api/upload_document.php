@@ -21,7 +21,8 @@ try {
     $title = $_POST['title'] ?? '';
     $summary = $_POST['summary'] ?? '';
     $documentDate = !empty($_POST['document_date']) ? $_POST['document_date'] : null;
-    $suggestedFilename = $_POST['suggested_filename'] ?? '';
+    // タイトルをそのままファイル名として使用
+    $suggestedFilename = !empty($_POST['suggested_filename']) ? $_POST['suggested_filename'] : $title;
     $fileSize = $_POST['file_size'] ?? $file['size'];
     $pageCount = !empty($_POST['page_count']) ? (int)$_POST['page_count'] : null;
     $uploadSource = $_POST['upload_source'] ?? 'scan';
